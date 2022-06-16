@@ -1,4 +1,4 @@
-import { useEffect, useContext} from "react";
+import { useContext} from "react";
 import UserItem from "./UserItem";
 import GithubContext from "../context/GithubContext";
 

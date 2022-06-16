@@ -30,6 +30,7 @@ function UserPage() {
         // Update the document title using the browser API
         getUser(loginId) //CALLING THE GET USER SETS THE STATE
         getRepos(loginId)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
 
