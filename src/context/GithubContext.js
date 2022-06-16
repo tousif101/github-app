@@ -13,7 +13,8 @@ export const GithubProvider = ({children}) => {
 
     const initialState = {
         users:[],
-        user:{}
+        user:{},
+        repos:[]
     }
 
     const [state,dispatch] = useReducer(githubReducer,initialState)
@@ -37,9 +38,31 @@ export const GithubProvider = ({children}) => {
         })
         .catch(function (error) {
             console.log(error);
-    });
-    
+    }); 
+
     }
+
+
+    const getRepos = (username) => {
+        axios.get(`https://api.github.com/users/${username}/repos`)
+        .then(function (response) {
+            console.log(response);
+            //Do if check here on the response. 
+            dispatch({
+                type:'GET_REPOS',
+                payload: response.data
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+    }); 
+
+    }
+
+
+
+
+
 
 
     const fetchUsers = (text) => {
@@ -63,8 +86,10 @@ export const GithubProvider = ({children}) => {
                 deleteUserState,
                 fetchUsers,
                 getUser,
+                getRepos,
                 user: state.user,
                 users: state.users,
+                repos : state.repos
             }}
         >
             {children}

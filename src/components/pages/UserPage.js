@@ -2,11 +2,11 @@ import { FaCodepen, FaStore, FaUserFriends, FaUsers } from 'react-icons/fa'
 import { useEffect, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import GithubContext from '../../context/GithubContext';
+import RepoList from '../repos/RepoList';
 
 function UserPage() {
-
     let { loginId } = useParams();
-    const {getUser,user} = useContext(GithubContext)
+    const {getUser,user,repos, getRepos} = useContext(GithubContext)
 
     const {
         name,
@@ -29,6 +29,7 @@ function UserPage() {
     useEffect(() => {
         // Update the document title using the browser API
         getUser(loginId) //CALLING THE GET USER SETS THE STATE
+        getRepos(loginId)
       }, []);
 
 
@@ -158,6 +159,8 @@ function UserPage() {
           </div>
         </div>
       </div>
+
+      <RepoList repos={repos} />
 
     </div>
   </>
